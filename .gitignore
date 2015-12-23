@@ -1,0 +1,6 @@
+mydatabase.db
+__pycache__/
+.cache/
+*.pyc
+venv/
+*.db
