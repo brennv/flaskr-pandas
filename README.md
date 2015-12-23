@@ -1,21 +1,21 @@
-![travisCI](https://travis-ci.org/brennan-v-/flaskr-sqlalchemy.svg) [![codecov.io](https://codecov.io/github/brennan-v-/flaskr-sqlalchemy/coverage.svg?branch=master)](https://codecov.io/github/brennan-v-/flaskr-sqlalchemy?branch=master)
+![travisCI](https://travis-ci.org/brennan-v-/flaskr-pandas.svg) [![Codecov](https://img.shields.io/codecov/c/github/codecov/example-python.svg)](https://codecov.io/github/brennan-v-/flaskr-pandas?branch=master)
  ![pythons](https://img.shields.io/badge/python-2.7%2C%203.3%2C%203.4%2C%203.5%2C%203.5--dev-blue.svg)
 
-                         / flaskr-sqlalchemy /
+                         / flaskr-pandas /
 
                  a minimal blog application
 
 
-    ~ What is flaskr-sqlalchemy?
+    ~ What is flaskr-pandas?
 
-      An sqlalchemy powered thumble blog application
+      A pandas powered thumble blog application
 
     ~ How do I use it?
 
       1. clone the repo and step into it
 
-          git clone git@github.com:brennan-v-/flaskr-sqlalchemy.git
-          cd flaskr-sqlalchemy
+          git clone git@github.com:brennan-v-/flaskr-pandas.git
+          cd flaskr-pandas
 
       2. create a virtual environment and install packages
 
@@ -27,7 +27,7 @@
             or
             
           pip install flask
-          pip install flask-sqlalchemy
+          pip install pandas
 
       3. start the application
 
@@ -38,8 +38,6 @@
 
     ~ Attributions:
 
-[mitsuhiko/flask/examples/flaskr](https://github.com/mitsuhiko/flask/tree/master/examples/flaskr/)
+[mitsuhiko/flask/examples/flaskr](https://github.com/mitsuhiko/flask/tree/master/examples/flaskr/) [![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=social&label=Star)](https://github.com/mitsuhiko/flask)
       
-[mitsuhiko/flask-sqlalchemy](https://github.com/mitsuhiko/flask-sqlalchemy)
-
-[SQLAlchemy](http://www.sqlalchemy.org/)
+[pydata/pandas](https://github.com/pydata/pandas) [![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=social&label=Star)](https://github.com/pydata/pandas)

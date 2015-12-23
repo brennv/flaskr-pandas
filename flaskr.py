@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, request, session, g, redirect, url_for, abort, \
-     render_template, flash  # prune g
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, request, session, redirect, url_for, abort, \
+     render_template, flash, Markup
+import pandas as pd
+import os
 
 # Instantiate and configure our little app :)
 app = Flask(__name__)
@@ -10,31 +11,21 @@ app.config['DEBUG'] = True
 app.config['SECRET_KEY'] ='super-secret-key'
 app.config['USERNAME'] = 'admin'
 app.config['PASSWORD'] = 'default'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydatabase.db'
+app.config['DATABASE'] = 'mydatabase.csv'
+# Possible io methods: csv, excel, hdf, sql, json, 
+# msgpack, html, gbq, stata, clipboard, pickle
 
-# Create the database 
-db = SQLAlchemy(app)
-
-# Define our table for blog entries, aka posts 
-class Entry(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(80), unique=True)
-    text = db.Column(db.String(120), unique=True)
-
-    def __init__(self, title, text):
-        self.title = title
-        self.text = text
-
-    def __repr__(self):
-        return '<Entry %r>' % self.title
-
-# Create the table 
-db.create_all()
-
+# Create the dataframe for blog entries, aka posts
+if not os.path.isfile(app.config['DATABASE']):
+    df = pd.DataFrame()
+    df['title'], df['text'] = [], []
+    df.to_csv(app.config['DATABASE'], index=False)
+    
 
 @app.route('/')
 def show_entries():
-    entries = Entry.query.all()
+    df_entries = pd.read_csv(app.config['DATABASE'])
+    entries = df_entries.to_dict(orient='records')
     return render_template('show_entries.html', entries=entries)
 
 
@@ -42,9 +33,9 @@ def show_entries():
 def add_entry():
     if not session.get('logged_in'):
         abort(401)
-    entry = Entry(request.form['title'], request.form['text'])
-    db.session.add(entry)
-    db.session.commit()
+    df_entry = pd.DataFrame([[Markup(request.form['title']), Markup(request.form['text'])]], 
+        columns=['title', 'text'])
+    df_entry.to_csv(app.config['DATABASE'], mode='a', header=False, index=False)
     flash('New entry was successfully posted')
     return redirect(url_for('show_entries'))
 
